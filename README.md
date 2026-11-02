@@ -26,7 +26,7 @@
 
 Проект для iPhone/iPad на iOS 16+ находится в `ios/`. iOS использует собственную оболочку SwiftUI / WKWebView; Electron в неё не входит. Для сборки нужны Mac, Xcode с iOS Simulator, Python 3 и XcodeGen (`brew install xcodegen`). Команда: `bash scripts/build-ios.sh`.
 
-Сборки iOS публикуются отдельно по тегам `ios-v*`: неподписанный IPA для устройства и ARM64 `.app` для симулятора. **Неподписанный IPA нельзя установить на iPhone напрямую: нужна подпись своим Apple-аккаунтом.** Инструкции и ограничения: [ios/RELEASE.md](ios/RELEASE.md).
+Сборки iOS публикуются отдельно по тегам `ios-v*`: неподписанный IPA для устройства и универсальный `.app` для симулятора (Intel / Apple Silicon). **Неподписанный IPA нельзя установить на iPhone напрямую: нужна подпись своим Apple-аккаунтом.** Инструкции и ограничения: [ios/RELEASE.md](ios/RELEASE.md).
 
 ## Contributors и благодарности
 

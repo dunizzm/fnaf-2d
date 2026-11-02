@@ -22,6 +22,8 @@ struct GameView: UIViewRepresentable {
         webView.scrollView.backgroundColor = .black
         webView.scrollView.isScrollEnabled = false
         webView.scrollView.bounces = false
+        webView.scrollView.contentInsetAdjustmentBehavior = .never
+        UIApplication.shared.isIdleTimerDisabled = true
         webView.navigationDelegate = context.coordinator
         context.coordinator.webView = webView
         webView.load(URLRequest(url: URL(string: "fnaf://game/index.html")!))

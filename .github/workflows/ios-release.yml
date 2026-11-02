@@ -7,7 +7,7 @@ permissions:
   contents: read
 jobs:
   build:
-    runs-on: macos-26
+    runs-on: macos-15-intel
     timeout-minutes: 25
     steps:
       - uses: actions/checkout@v4
@@ -48,4 +48,4 @@ jobs:
           path: release-ios
       - env:
           GH_TOKEN: ${{ github.token }}
-        run: gh release create "$GITHUB_REF_NAME" release-ios/* --verify-tag --latest=false --title "FNAF 2D iOS v1.0.0 — unsigned" --notes-file ios/RELEASE.md
+        run: gh release create "$GITHUB_REF_NAME" release-ios/* --verify-tag --latest=false --title "FNAF 2D $GITHUB_REF_NAME — unsigned" --notes-file ios/RELEASE.md

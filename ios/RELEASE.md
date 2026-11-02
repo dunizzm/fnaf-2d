@@ -4,8 +4,8 @@
 
 ### Файлы
 
-- **`FNAF-2D-1.0.1-ios-arm64-unsigned.ipa`** — сборка для реального iPhone/iPad. **Она не подписана и не устанавливается на устройство напрямую.** Для установки нужно подписать приложение с подходящим сертификатом и provisioning profile через свой Apple developer account / Xcode или используемый вами инструмент подписи. Это не публикация в App Store или TestFlight.
-- **`FNAF-2D-1.0.1-ios-simulator-universal.zip`** — `.app` для iOS Simulator на Mac с Intel или Apple Silicon. Это не приложение для реального устройства. После распаковки: `xcrun simctl install booted FNAF2D.app`, затем `xcrun simctl launch booted com.dunizzm.fnaf2d`.
+- **`FNAF-2D-1.0.2-ios-arm64-unsigned.ipa`** — сборка для реального iPhone/iPad. **Она не подписана и не устанавливается на устройство напрямую.** Для установки нужно подписать приложение с подходящим сертификатом и provisioning profile через свой Apple developer account / Xcode или используемый вами инструмент подписи. Это не публикация в App Store или TestFlight.
+- **`FNAF-2D-1.0.2-ios-simulator-universal.zip`** — `.app` для iOS Simulator на Mac с Intel или Apple Silicon. Это не приложение для реального устройства. После распаковки: `xcrun simctl install booted FNAF2D.app`, затем `xcrun simctl launch booted com.dunizzm.fnaf2d`.
 - **`SHA256SUMS-ios.txt`** — контрольные суммы архивов.
 
 У IPA проверена архитектура arm64; у приложения для симулятора — arm64 и x86_64. Версия для симулятора автоматически запущена в iOS Simulator: проверены загрузка всех текстур, декодирование 15 звуков, карта 11 камер, шрифт и доступ к локальным сохранениям. Физическое устройство и реальное аудиовоспроизведение вручную не проверялись.

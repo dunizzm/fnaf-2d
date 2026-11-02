@@ -73,7 +73,7 @@ struct GameView: UIViewRepresentable {
             if(h>innerHeight+1)throw Error('Game exceeds iPhone viewport');
             return {ok:true,textures:Object.keys(assets).length,sounds:AUDIO_NAMES.length,cameras:11,width:innerWidth,height:innerHeight};
             """
-            webView.callAsyncJavaScript(check, arguments: [:], in: nil, contentWorld: .page) { result in
+            webView.callAsyncJavaScript(check, arguments: [:], in: nil, in: .page) { result in
                 switch result {
                 case .success(let value): self.writeSmoke(value as? [String: Any] ?? ["ok": false, "error": "Invalid report"])
                 case .failure(let error): self.writeSmoke(["ok": false, "error": error.localizedDescription])

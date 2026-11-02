@@ -13,3 +13,11 @@
 Исходный код сайта находится в папке `dist/`. Для локального запуска: python -m http.server 4317 --directory dist, затем http://localhost:4317. Проверки: node engine.test.cjs и node balance.test.cjs.
 
 Персонажи, графика и исходные звуки FNAF принадлежат Scott Cawthon. Набор изображений и звуков: https://github.com/wellsousaaa/Five-Nights-at-Freddys-Web/tree/main/src/media . Код игровой логики и интерфейса написан отдельно. Металлические шаги и писк носа синтезируются. Шрифт Consolas — Microsoft; файл-источник: https://github.com/MemeCrafters/meme-generator/blob/main/resources/fonts/consola.ttf .
+
+## Участники
+
+**dunizzm** — идея, руководство проектом и тестирование. **ChatGPT / Codex (OpenAI)** — помощь с кодом, отладкой и подготовкой игры. Подробности: [AUTHORS.md](AUTHORS.md).
+
+## Лицензия
+
+Самостоятельно написанный код и документация доступны под [MIT License](LICENSE). **Текстуры, исходные звуки FNAF, производные атласы и шрифт Consolas в эту лицензию не входят.** Их источники и отдельный статус перечислены в [THIRD_PARTY_NOTICES.md](THIRD_PARTY_NOTICES.md).

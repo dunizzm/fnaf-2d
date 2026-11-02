@@ -1,0 +1,51 @@
+name: iOS release
+on:
+  push:
+    tags: ['ios-v*']
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  build:
+    runs-on: macos-26
+    timeout-minutes: 25
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '24'
+      - name: Check game simulation
+        run: node engine.test.cjs && node balance.test.cjs
+      - name: Install project generator
+        run: command -v xcodegen || brew install xcodegen
+      - name: Build device and simulator apps; launch simulator
+        run: bash scripts/build-ios.sh
+      - uses: actions/upload-artifact@v4
+        with:
+          name: ios-builds
+          path: release-ios/*
+          if-no-files-found: error
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: ios-diagnostics
+          path: |
+            ios-output/*.log
+            ios-output/*.json
+            ios-output/*.png
+          if-no-files-found: ignore
+  release:
+    needs: build
+    if: startsWith(github.ref, 'refs/tags/ios-v')
+    runs-on: ubuntu-24.04
+    permissions:
+      contents: write
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/download-artifact@v4
+        with:
+          name: ios-builds
+          path: release-ios
+      - env:
+          GH_TOKEN: ${{ github.token }}
+        run: gh release create "$GITHUB_REF_NAME" release-ios/* --verify-tag --latest=false --title "FNAF 2D iOS v1.0.0 — unsigned" --notes-file ios/RELEASE.md

@@ -6,3 +6,8 @@ node_modules/
 .desktop-stage/
 desktop-builds/
 release/
+ios/WebGame/
+ios/FNAF2D.xcodeproj/
+ios/Info.plist
+ios-output/
+release-ios/

@@ -2,3 +2,7 @@ outputs/
 __pycache__/
 *.log
 .DS_Store
+node_modules/
+.desktop-stage/
+desktop-builds/
+release/

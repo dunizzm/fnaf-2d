@@ -14,6 +14,14 @@
 
 Персонажи, графика и исходные звуки FNAF принадлежат Scott Cawthon. Набор изображений и звуков: https://github.com/wellsousaaa/Five-Nights-at-Freddys-Web/tree/main/src/media . Код игровой логики и интерфейса написан отдельно. Металлические шаги и писк носа синтезируются. Шрифт Consolas — Microsoft; файл-источник: https://github.com/MemeCrafters/meme-generator/blob/main/resources/fonts/consola.ttf .
 
+## Настольные версии
+
+Готовые приложения для Windows x64, Linux x64, macOS Intel и Apple Silicon доступны в [Releases](https://github.com/dunizzm/fnaf-2d/releases). Интернет во время игры не требуется. Эти сборки не подписаны сертификатами Microsoft/Apple.
+
+Для разработки: Node.js 24, `npm ci`, затем `npm start`. Проверки: `npm test`. Нативная сборка на текущей ОС: `npm run build:desktop` (Linux также требует `xvfb-run` для автоматической проверки запуска). Готовый архив появится в `release/`.
+
+Публикация тега `v*` запускает сборку и проверку приложений на четырёх нативных GitHub Actions runners. Release публикуется только после успешного завершения всех четырёх сборок. Для будущих релизов номер версии и имена файлов в release notes нужно обновить перед тегом.
+
 ## Contributors и благодарности
 
 - **[dunizzm](https://github.com/dunizzm)** — идея, требования, руководство проектом и тестирование.

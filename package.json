@@ -1,0 +1,18 @@
+{
+  "name": "fnaf-2d-fan-game",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Unofficial offline 2D FNAF fan game",
+  "author": "dunizzm",
+  "license": "MIT",
+  "main": "desktop/main.cjs",
+  "scripts": {
+    "start": "electron .",
+    "test": "node engine.test.cjs && node balance.test.cjs && node --test desktop/protocol.test.cjs",
+    "build:desktop": "node scripts/build-desktop.mjs"
+  },
+  "devDependencies": {
+    "@electron/packager": "20.3.0",
+    "electron": "45.2.1"
+  }
+}

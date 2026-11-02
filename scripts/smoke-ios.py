@@ -35,4 +35,7 @@ try:
     else:
         raise RuntimeError('Timed out waiting for the native iOS WebKit smoke report.')
 finally:
-    subprocess.run(['xcrun', 'simctl', 'shutdown', udid], check=False)
+    try:
+        subprocess.run(['xcrun', 'simctl', 'shutdown', udid], check=False, timeout=15)
+    except subprocess.TimeoutExpired:
+        print('Simulator shutdown timed out after successful test; runner teardown will clean it up.')

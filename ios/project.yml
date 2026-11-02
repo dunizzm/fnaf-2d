@@ -6,8 +6,8 @@ options:
 settings:
   base:
     SWIFT_VERSION: '5.0'
-    MARKETING_VERSION: '1.0.2'
-    CURRENT_PROJECT_VERSION: '3'
+    MARKETING_VERSION: '1.0.3'
+    CURRENT_PROJECT_VERSION: '4'
     TARGETED_DEVICE_FAMILY: '1,2'
     ENABLE_USER_SCRIPT_SANDBOXING: YES
     CODE_SIGNING_ALLOWED: NO
@@ -34,8 +34,8 @@ targets:
       path: Info.plist
       properties:
         CFBundleDisplayName: FNAF 2D
-        CFBundleShortVersionString: '1.0.2'
-        CFBundleVersion: '3'
+        CFBundleShortVersionString: '1.0.3'
+        CFBundleVersion: '4'
         LSRequiresIPhoneOS: true
         UIRequiresFullScreen: true
         UIStatusBarHidden: true

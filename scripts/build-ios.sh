@@ -4,9 +4,12 @@ cd "$(dirname "$0")/.."
 python3 scripts/prepare-ios.py
 xcodegen generate --spec ios/project.yml --project ios
 mkdir -p ios-output release-ios
+echo 'Building iOS device app'
 xcodebuild -project ios/FNAF2D.xcodeproj -scheme FNAF2D -configuration Release -sdk iphoneos -destination 'generic/platform=iOS' -derivedDataPath ios-output/device CODE_SIGNING_ALLOWED=NO CODE_SIGNING_REQUIRED=NO CODE_SIGN_IDENTITY= build > ios-output/device-build.log 2>&1 || { tail -100 ios-output/device-build.log; exit 1; }
+echo 'Device build passed; building universal simulator app'
 xcodebuild -project ios/FNAF2D.xcodeproj -scheme FNAF2D -configuration Release -sdk iphonesimulator -destination 'generic/platform=iOS Simulator' -derivedDataPath ios-output/simulator 'ARCHS=arm64 x86_64' ONLY_ACTIVE_ARCH=NO CODE_SIGNING_ALLOWED=NO CODE_SIGNING_REQUIRED=NO CODE_SIGN_IDENTITY= build > ios-output/simulator-build.log 2>&1 || { tail -100 ios-output/simulator-build.log; exit 1; }
-python3 scripts/smoke-ios.py
+echo 'Both builds passed; checking the game in iPhone Simulator'
+python3 -u scripts/smoke-ios.py
 python3 - <<'PY'
 from pathlib import Path
 import plistlib, shutil, subprocess, hashlib, zipfile

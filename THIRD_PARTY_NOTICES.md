@@ -14,7 +14,7 @@ MIT License в корне репозитория распространяетс�
 
 ## Consolas
 
-`dist/assets/Consolas.ttf` — шрифт Microsoft. Он исключён из MIT License проекта. Право использования определяется условиями правообладателя; наличие файла здесь не предоставляет отдельной лицензии на его распространение.
+`dist/assets/Consolas.ttf` — шрифт Microsoft. Дизайнер — Luc(as) de Groot; производитель и правообладатель — Microsoft Corporation (по метаданным файла). Он исключён из MIT License проекта. Право использования определяется условиями правообладателя; наличие файла здесь не предоставляет отдельной лицензии на его распространение.
 
 Источник файла: [MemeCrafters/meme-generator — consola.ttf](https://github.com/MemeCrafters/meme-generator/blob/main/resources/fonts/consola.ttf).
 

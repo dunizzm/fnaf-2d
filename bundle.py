@@ -14,7 +14,7 @@ html=html.replace('<head>', '<head><!--\n'+(root/'LICENSE').read_text()+'\n'+(ro
 (out/'FNAF-2D.html').write_text(html)
 with zipfile.ZipFile(out/'FNAF-2D.zip','w',zipfile.ZIP_DEFLATED) as z:
  z.write(out/'FNAF-2D.html','FNAF-2D.html');z.write(root/'README.md','README.md')
- for f in ['LICENSE','THIRD_PARTY_NOTICES.md','AUTHORS.md']:z.write(root/f,f)
+ for f in ['LICENSE','THIRD_PARTY_NOTICES.md','AUTHORS.md','CONTRIBUTORS.md']:z.write(root/f,f)
  for p in dist.rglob('*'):
   if p.is_file():z.write(p,Path('source/dist')/p.relative_to(dist))
  for f in ['engine.test.cjs','balance.test.cjs']:z.write(root/f,'source/'+f)

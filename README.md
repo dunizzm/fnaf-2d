@@ -14,9 +14,16 @@
 
 Персонажи, графика и исходные звуки FNAF принадлежат Scott Cawthon. Набор изображений и звуков: https://github.com/wellsousaaa/Five-Nights-at-Freddys-Web/tree/main/src/media . Код игровой логики и интерфейса написан отдельно. Металлические шаги и писк носа синтезируются. Шрифт Consolas — Microsoft; файл-источник: https://github.com/MemeCrafters/meme-generator/blob/main/resources/fonts/consola.ttf .
 
-## Участники
+## Contributors и благодарности
 
-**dunizzm** — идея, руководство проектом и тестирование. **ChatGPT / Codex (OpenAI)** — помощь с кодом, отладкой и подготовкой игры. Подробности: [AUTHORS.md](AUTHORS.md).
+- **[dunizzm](https://github.com/dunizzm)** — идея, требования, руководство проектом и тестирование.
+- **ChatGPT / Codex (OpenAI)** — помощь с кодом, интерфейсом, звуком, отладкой и проверками.
+- **Scott Cawthon / правообладатели FNAF** — оригинальная игра, персонажи, графика и исходные звуки.
+- **[wellsousaaa](https://github.com/wellsousaaa/Five-Nights-at-Freddys-Web)** — источник файлов изображений и звуков.
+- **Luc(as) de Groot и Microsoft Corporation** — дизайнер и правообладатель Consolas.
+- **[MemeCrafters](https://github.com/MemeCrafters/meme-generator)** — источник файла шрифта.
+
+Роли и пояснение к автоматическому графу GitHub: [CONTRIBUTORS.md](CONTRIBUTORS.md).
 
 ## Лицензия
 

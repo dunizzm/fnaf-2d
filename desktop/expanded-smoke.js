@@ -17,6 +17,7 @@
   check(engine.duration===540,'Expanded shift duration is incorrect');
   check(engine.maxPower===115,'Battery upgrade missing');
   engine.elapsed=90;updateHUD();
+  check(/^\d+°C/.test(document.getElementById('temperature').textContent),'Temperature is not displayed as an integer');
   check(document.getElementById('time').textContent.includes('1:00'),'Precise clock does not show minutes');
   document.getElementById('clockSwitch').click();
   check(!document.getElementById('time').textContent.includes(':'),'Clock did not hide minutes');

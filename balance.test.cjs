@@ -2,7 +2,7 @@ const assert=require('node:assert/strict');const Engine=require('./dist/engine.j
 let won=0,minPower=100,maxClosed=0;
 for(let seed=1;seed<=100;seed++){
  let state=seed;const random=()=>{state=(Math.imul(state,1664525)+1013904223)>>>0;return state/4294967296;};
- const e=new Engine(5,[5,5,5,5],random);let nextCheck=0,heldUntil=[0,0],runUntil=0,closed=0;
+ const e=new Engine(5,[5,5,5,5,5],random);let nextCheck=0,heldUntil=[0,0],runUntil=0,closed=0;
  for(let t=0;t<540.2&&e.state==='playing';t+=.1){
   // Look at Pirate Cove for 2 seconds every 20 seconds, and inspect both doors every 3 seconds.
   const watch=t%20<2;e.monitor=watch;e.cam=2;e.lights=[false,false];

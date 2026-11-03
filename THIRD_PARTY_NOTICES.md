@@ -25,3 +25,7 @@ MIT License в корне репозитория распространяетс�
 ## Настольная оболочка
 
 Дистрибутивы включают Electron, Chromium и их зависимости под собственными лицензиями. Сборка сохраняет файлы `LICENSE` и `LICENSES.chromium.html`, предоставленные Electron. Подробности: https://github.com/electron/electron/blob/main/LICENSE . Эти зависимости не становятся собственностью автора игры.
+
+## Endo-01 sprite (Expanded 2.0.3)
+
+`dist/assets/Textures/CustomNight/endo.png`: fan render “Endo 01 [render]” credited to Arrancon on DeviantArt, obtained from [ClipartMax](https://www.clipartmax.com/max/m2H7d3N4Z5H7d3d3/). This is a fan render of the FNAF character, not a texture extracted from the original game. Character/design © Scott Cawthon; render belongs to its artist. This artwork is excluded from the code's MIT license. Camera shading, placement and jumpscare motion are applied by the game at runtime.

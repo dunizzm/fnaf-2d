@@ -4,8 +4,8 @@ for(let seed=1;seed<=100;seed++){
  let state=seed;const random=()=>{state=(Math.imul(state,1664525)+1013904223)>>>0;return state/4294967296;};
  const e=new Engine(5,[5,5,5,5,5],random);let nextCheck=0,heldUntil=[0,0],runUntil=0,closed=0;
  for(let t=0;t<540.2&&e.state==='playing';t+=.1){
-  // Look at Pirate Cove for 2 seconds every 20 seconds, and inspect both doors every 3 seconds.
-  const watch=t%20<2;e.monitor=watch;e.cam=2;e.lights=[false,false];
+  // Look at Pirate Cove for 2 seconds every 20 seconds, inspect both doors every 3 seconds, and lower the monitor as soon as BB appears.
+  const watch=t%20<2&&!e.phantom.active;e.monitor=watch;e.cam=2;e.lights=[false,false];
   if(t>=nextCheck&&!watch){nextCheck=t+3;e.lights=[true,true];for(let side=0;side<2;side++)if(e.atDoor(side))heldUntil[side]=t+4;}
   for(let side=0;side<2;side++)e.doors[side]=t<heldUntil[side]||(side===0&&t<runUntil);
   if(e.doors.some(Boolean))closed+=.1;e.tick(.1);

@@ -1,7 +1,9 @@
 (async()=>{
   const check=(ok,message)=>{if(!ok)throw Error(message);};
   // This runs only in the app's isolated temporary smoke-test profile.
-  career.data.wallet=2000;career.save();showShop();
+  check(!career.customUnlocked&&document.getElementById('custom').disabled,'Custom Night must start locked');
+  await startNight(1,[0,0,0,0]);check(engine===null,'Locked custom night could be started');
+  career.data.completed=6;career.data.night=6;completed=6;saved=6;career.data.wallet=2000;career.save();updateCareerUI();showShop();
   for(const id of ['freddy','bonnie','chica','foxy','clock','battery','motor','reserve']){
     const button=document.querySelector('[data-buy="'+id+'"]');
     check(button&&!button.disabled,'Shop purchase unavailable: '+id);button.click();
@@ -45,6 +47,14 @@
   document.getElementById('earnedShop').click();
   check(document.querySelectorAll('.shop-item').length===8,'Shop catalog incomplete');
   check(new Career(localStorage).data.wallet===career.data.wallet,'Wallet did not persist');
+  // Completing night six unlocks Custom Night through the actual victory flow.
+  goMenu();career.data.completed=5;career.data.night=6;completed=5;saved=6;persist();
+  check(!career.customUnlocked&&document.getElementById('custom').disabled,'Five nights must not unlock Custom Night');
+  engine=new NightEngine(6);customLevels=null;expandedRoundId='smoke-sixth-night';lastSettlement=null;view='playing';engine.elapsed=539.9;engine.tick(.2);processEvents();
+  check(completed===6&&career.customUnlocked&&!document.getElementById('custom').disabled,'Sixth-night victory did not unlock Custom Night');
+  check(new Career(localStorage).data.completed===6,'Sixth-night completion did not persist');
+  goMenu();showExtras();check(document.querySelectorAll('[data-preview]').length===5,'Extras gallery is incomplete');
+  check(assets['PhantomBB-atlas.webp']?.naturalWidth===3744,'Original Phantom animation atlas missing');
   check(assets['Textures/CustomNight/phantom-bb.png']?.naturalWidth>0,'Phantom BB texture missing');
   customMenu();check(document.getElementById('ai4')&&!document.getElementById('ai5'),'Phantom AI control missing or removed Endo remains');
   const beforeDemo=JSON.stringify(career.data);
@@ -52,7 +62,7 @@
   // Hidden desktop windows may throttle animation frames; advance the fixture deterministically.
   engine.tick(.1);processEvents();
   check(view==='demo'&&engine.phantom.active,'Phantom demo did not show the camera encounter');render(clock);
-  engine.tick(.25);for(let i=0;i<10;i++)engine.tick(.25);processEvents();render(clock);
+  engine.tick(.25);for(let i=0;i<4;i++)engine.tick(.25);processEvents();render(clock);
   check(engine.phantom.scare>0&&engine.state==='playing'&&!engine.fanOn&&engine.fanFault>0,'Nonlethal Phantom scare or fan failure missing');
   check(!document.getElementById('demoExit').hidden,'Demo exit missing');
   check(JSON.stringify(career.data)===beforeDemo,'Demo changed career progress or money');

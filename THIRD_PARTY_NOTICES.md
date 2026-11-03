@@ -26,6 +26,10 @@ MIT License в корне репозитория распространяетс�
 
 Дистрибутивы включают Electron, Chromium и их зависимости под собственными лицензиями. Сборка сохраняет файлы `LICENSE` и `LICENSES.chromium.html`, предоставленные Electron. Подробности: https://github.com/electron/electron/blob/main/LICENSE . Эти зависимости не становятся собственностью автора игры.
 
-## Phantom Balloon Boy (Expanded 2.0.9)
+## Phantom Balloon Boy — original FNAF 3 resources (Expanded 2.1.0)
 
-`Textures/CustomNight/phantom-bb.png` is an AI-assisted recreation made with OpenAI image generation, inspired by Phantom Balloon Boy from FNAF 3; it is not an extracted original game sprite. Character/design © Scott Cawthon. Character artwork is excluded from the code MIT license.
+`Textures/CustomNight/phantom-bb.png` and `PhantomBB-atlas.webp` use original FNAF 3 images archived in [Dwell888/FNAF3html5](https://github.com/Dwell888/FNAF3html5/blob/main/index.html), sprite target “BB Jumpscare”, costumes 226–667. The camera face uses costume 347. Frames are packed into a WebP atlas without generating or redesigning the artwork.
+
+`Sounds/phantom-scream.ogg` is the FNAF 3 `scream3.ogg` audio obtained from [emilia-gomes2008/fnaf-jumpscare-extension](https://github.com/emilia-gomes2008/fnaf-jumpscare-extension/tree/main/jumpscare_sounds/fnaf3). The generated replacement previously used in 2.0.9 has been removed.
+
+Original FNAF images, animations and sounds © Scott Cawthon; excluded from the code MIT license.

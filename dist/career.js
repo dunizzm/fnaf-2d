@@ -14,8 +14,9 @@ class Career {
  const integer=(n,lo,hi,fallback=lo)=>Number.isFinite(n)?Math.max(lo,Math.min(hi,Math.floor(n))):fallback;
  const permanent=new Set(SHOP_ITEMS.filter(i=>i.type!=='consumable').map(i=>i.id));
  const owned=Array.isArray(raw.owned)?[...new Set(raw.owned.filter(x=>permanent.has(x)))]:[];
- this.data={version:1,wallet:integer(raw.wallet,0,10000000),owned,equipped:Array.isArray(raw.equipped)?[...new Set(raw.equipped.filter(x=>owned.includes(x)&&SHOP_ITEMS.some(i=>i.id===x&&i.type==='toy')))]:[],clockEnabled:!!raw.clockEnabled&&owned.includes('clock'),reserve:integer(raw.reserve,0,9),night:integer(raw.night,1,5),completed:integer(raw.completed,0,5),shifts:integer(raw.shifts,0,10000000),earned:integer(raw.earned,0,10000000),settled:Array.isArray(raw.settled)?raw.settled.filter(x=>typeof x==='string').slice(-128):[]};
+ this.data={version:1,wallet:integer(raw.wallet,0,10000000),owned,equipped:Array.isArray(raw.equipped)?[...new Set(raw.equipped.filter(x=>owned.includes(x)&&SHOP_ITEMS.some(i=>i.id===x&&i.type==='toy')))]:[],clockEnabled:!!raw.clockEnabled&&owned.includes('clock'),reserve:integer(raw.reserve,0,9),night:Math.max(integer(raw.night,1,6),Math.min(6,integer(raw.completed,0,6)+1)),completed:integer(raw.completed,0,6),shifts:integer(raw.shifts,0,10000000),earned:integer(raw.earned,0,10000000),settled:Array.isArray(raw.settled)?raw.settled.filter(x=>typeof x==='string').slice(-128):[]};
  }
+ get customUnlocked(){return this.data.completed>=6;}
  save(){try{this.storage?.setItem('fnaf-expanded-save-v1',JSON.stringify(this.data));this.saved=true;}catch{this.saved=false;}return this.saved;}
  item(id){return SHOP_ITEMS.find(i=>i.id===id);}
  owns(id){return this.data.owned.includes(id);}

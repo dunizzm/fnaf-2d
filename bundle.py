@@ -1,7 +1,7 @@
 from pathlib import Path
 import base64,json,re,zipfile,mimetypes
 root=Path(__file__).parent;dist=root/'dist';out=root/'outputs';out.mkdir(exist_ok=True)
-files=list((dist/'assets/Textures/Cams').glob('*.webp'))+list((dist/'assets/Textures/Office').glob('*.webp'))+list((dist/'assets/Textures/CustomNight').glob('*.png'))+list((dist/'assets/Sounds').glob('*.mp3'))+list((dist/'assets').glob('*-atlas.webp'))+[dist/'assets/hero.webp',dist/'assets/Consolas.ttf',dist/'assets/Textures/CameraButton.png',dist/'assets/Textures/Cams/Complete_Map.png']
+files=list((dist/'assets/Textures/Cams').glob('*.webp'))+list((dist/'assets/Textures/Office').glob('*.webp'))+list((dist/'assets/Textures/CustomNight').glob('*.png'))+list((dist/'assets/Sounds').glob('*.mp3'))+list((dist/'assets/Sounds').glob('*.ogg'))+list((dist/'assets').glob('*-atlas.webp'))+[dist/'assets/hero.webp',dist/'assets/Consolas.ttf',dist/'assets/Textures/CameraButton.png',dist/'assets/Textures/Cams/Complete_Map.png']
 assets={}
 for p in files:
  mime=mimetypes.guess_type(p.name)[0] or 'application/octet-stream';assets[p.relative_to(dist/'assets').as_posix()]='data:'+mime+';base64,'+base64.b64encode(p.read_bytes()).decode()

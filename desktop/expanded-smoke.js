@@ -48,7 +48,9 @@
   check(assets['Textures/CustomNight/phantom-bb.png']?.naturalWidth>0,'Phantom BB texture missing');
   customMenu();check(document.getElementById('ai4')&&!document.getElementById('ai5'),'Phantom AI control missing or removed Endo remains');
   const beforeDemo=JSON.stringify(career.data);
-  await showPhantomDemo();await new Promise(resolve=>setTimeout(resolve,400));
+  await showPhantomDemo();
+  // Hidden desktop windows may throttle animation frames; advance the fixture deterministically.
+  engine.tick(.1);processEvents();
   check(view==='demo'&&engine.phantom.active,'Phantom demo did not show the camera encounter');render(clock);
   engine.tick(.25);for(let i=0;i<10;i++)engine.tick(.25);processEvents();render(clock);
   check(engine.phantom.scare>0&&engine.state==='playing'&&!engine.fanOn&&engine.fanFault>0,'Nonlethal Phantom scare or fan failure missing');

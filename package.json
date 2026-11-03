@@ -1,18 +1,19 @@
 {
-  "name": "fnaf-2d-fan-game",
-  "version": "1.0.0",
+  "name": "fnaf-2d-expanded",
+  "version": "2.0.0",
   "private": true,
-  "description": "Unofficial offline 2D FNAF fan game",
+  "description": "FNAF 2D Expanded: nine-minute shifts, collectible perks, shop and temperature",
   "author": "dunizzm",
   "license": "MIT",
   "main": "desktop/main.cjs",
   "scripts": {
     "start": "electron .",
-    "test": "node engine.test.cjs && node balance.test.cjs && node --test desktop/protocol.test.cjs",
+    "test": "node --test expanded.test.cjs && node balance.test.cjs && node --test desktop/protocol.test.cjs",
     "build:desktop": "node scripts/build-desktop.mjs"
   },
   "devDependencies": {
     "@electron/packager": "20.3.0",
     "electron": "45.2.1"
-  }
+  },
+  "productName": "FNAF-2D-Expanded"
 }

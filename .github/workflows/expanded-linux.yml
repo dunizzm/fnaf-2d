@@ -1,0 +1,52 @@
+name: Expanded Linux release
+on:
+  push:
+    tags: ['expanded-v*']
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  build:
+    runs-on: ubuntu-22.04
+    timeout-minutes: 20
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '24'
+          cache: npm
+      - run: npm ci --no-audit --no-fund
+      - run: npm test
+      - name: Build and test the actual Expanded Linux app
+        run: npm run build:desktop
+        env:
+          FNAF_SMOKE_SCREENSHOT: expanded-shop.png
+      - name: Write archive checksum
+        working-directory: release
+        run: sha256sum *.tar.gz > SHA256SUMS.txt
+      - uses: actions/upload-artifact@v4
+        with:
+          name: expanded-linux
+          path: release/*
+          if-no-files-found: error
+          compression-level: 0
+      - uses: actions/upload-artifact@v4
+        with:
+          name: expanded-preview
+          path: expanded-shop.png
+          if-no-files-found: error
+  release:
+    needs: build
+    if: startsWith(github.ref, 'refs/tags/expanded-v')
+    runs-on: ubuntu-24.04
+    permissions:
+      contents: write
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/download-artifact@v4
+        with:
+          name: expanded-linux
+          path: release
+      - env:
+          GH_TOKEN: ${{ github.token }}
+        run: gh release create "$GITHUB_REF_NAME" release/* --verify-tag --latest=false --title "FNAF 2D Expanded $GITHUB_REF_NAME — Linux" --notes-file EXPANDED.md

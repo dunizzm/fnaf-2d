@@ -1,5 +1,7 @@
 const { app, BrowserWindow, Menu, protocol, net, shell, session } = require('electron');
 const path = require('node:path');
+const fs = require('node:fs');
+const os = require('node:os');
 const { pathToFileURL } = require('node:url');
 const { resolveAsset } = require('./protocol.cjs');
 const smoke = process.argv.includes('--smoke-test');
@@ -10,14 +12,15 @@ protocol.registerSchemesAsPrivileged([{ scheme: 'fnaf', privileges: {
   standard: true, secure: true, supportFetchAPI: true, corsEnabled: true
 } }]);
 
-app.setName('FNAF 2D');
+app.setName('FNAF 2D Expanded');
+if(smoke)app.setPath('userData',fs.mkdtempSync(path.join(os.tmpdir(),'fnaf-expanded-smoke-')));
 const csp = "default-src 'self'; script-src 'self'; style-src 'self' 'unsafe-inline'; img-src 'self' data:; font-src 'self'; media-src 'self'; connect-src 'self'; object-src 'none'; base-uri 'none'; frame-src 'none'";
 const mime = { '.html': 'text/html; charset=utf-8', '.js': 'text/javascript; charset=utf-8', '.css': 'text/css; charset=utf-8', '.webp': 'image/webp', '.png': 'image/png', '.gif': 'image/gif', '.ttf': 'font/ttf', '.mp3': 'audio/mpeg' };
 
 async function createWindow() {
   window = new BrowserWindow({
     width: 1280, height: 720, minWidth: 800, minHeight: 450,
-    title: 'Five Nights at Freddy’s — 2D Fan Game',
+    title: 'FNAF 2D — Expanded Edition',
     backgroundColor: '#000000', show: !smoke, autoHideMenuBar: true,
     webPreferences: { nodeIntegration: false, contextIsolation: true, sandbox: true, webSecurity: true }
   });
@@ -47,7 +50,14 @@ async function createWindow() {
         localStorage.removeItem('__desktop_smoke');
         return { textures: Object.keys(assets).length, sounds: AUDIO_NAMES.length, cameras: 11 };
       })()`, true);
-      console.log('DESKTOP_SMOKE_PASS', JSON.stringify(result));
+      const expanded=await window.webContents.executeJavaScript(fs.readFileSync(path.join(__dirname,'expanded-smoke.js'),'utf8'),true);
+      if(process.env.FNAF_SMOKE_SCREENSHOT){
+        window.show();
+        await window.webContents.executeJavaScript('showShop(); new Promise(resolve=>requestAnimationFrame(()=>requestAnimationFrame(resolve)))');
+        const shot=await window.webContents.capturePage();
+        fs.writeFileSync(path.resolve(process.env.FNAF_SMOKE_SCREENSHOT),shot.toPNG());
+      }
+      console.log('DESKTOP_SMOKE_PASS', JSON.stringify({...result,expanded}));
       app.exit(0);
     } catch (error) {
       console.error('DESKTOP_SMOKE_FAIL', error);

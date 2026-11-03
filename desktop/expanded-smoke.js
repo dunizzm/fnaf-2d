@@ -40,9 +40,11 @@
   check(document.querySelectorAll('.shop-item').length===8,'Shop catalog incomplete');
   check(new Career(localStorage).data.wallet===career.data.wallet,'Wallet did not persist');
   // Render all Endo states in the isolated test profile, using the shipped texture.
-  check(assets['Textures/CustomNight/endo.png']?.naturalWidth>0,'Endo texture missing');
+  check(assets['Textures/Cams/Backstage.webp']?.naturalWidth>0,'Endo texture missing');
   engine=new NightEngine(1);view='playing';engine.monitor=true;engine.cam=9;render(clock);
   check(engine.inCamera(9).some(e=>e.name==='Endo'),'Night-one Endo missing from Backstage');
+  engine.enemies[4].pos=1;render(clock);
+  for(const [pos,cam] of [[1,3],[2,5],[3,6]]){engine.enemies[4].pos=pos;engine.cam=cam;render(clock);}
   engine.monitor=false;engine.lights[0]=true;engine.enemies[4].pos=4;render(clock);
   jumpEnemy='Endo';jumpStart=clock;view='jump';render(clock+.3);
   check(Number.isFinite(engine.reactionGrace(4)),'Invalid Endo reaction window');

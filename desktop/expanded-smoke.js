@@ -48,6 +48,10 @@
   engine.monitor=false;engine.lights[0]=true;engine.enemies[4].pos=4;render(clock);
   jumpEnemy='Endo';jumpStart=clock;view='jump';render(clock+.3);
   check(Number.isFinite(engine.reactionGrace(4)),'Invalid Endo reaction window');
+  engine=new NightEngine(1,[5,0,0,0,5],()=>1);engine.elapsed=80;engine.monitor=true;engine.cam=9;engine.enemies[0].pos=2;engine.tick(.1);engine.tick(.25);
+  check(engine.endoClash&&assets['Textures/CustomNight/endo-punch.png']?.naturalWidth>0,'Endo punch animation missing');render(clock);processEvents();
+  for(let i=0;i<5;i++)engine.tick(.25);
+  check(engine.enemies[0].pos===1,'Endo did not push Bonnie back');
   customMenu();check(document.getElementById('ai4'),'Endo AI control missing');
   goMenu();
   return{shopItems:8,roundSeconds:540,clockMinutes:true,fanHeat:true,perks:true,payment:true,persistence:true};

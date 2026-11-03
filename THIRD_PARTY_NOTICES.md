@@ -26,6 +26,6 @@ MIT License в корне репозитория распространяетс�
 
 Дистрибутивы включают Electron, Chromium и их зависимости под собственными лицензиями. Сборка сохраняет файлы `LICENSE` и `LICENSES.chromium.html`, предоставленные Electron. Подробности: https://github.com/electron/electron/blob/main/LICENSE . Эти зависимости не становятся собственностью автора игры.
 
-## Endo-01 (Expanded 2.0.7)
+## Phantom Balloon Boy (Expanded 2.0.9)
 
-`Textures/CustomNight/endo.png` and its punching-pose variant `endo-punch.png` are AI-assisted reconstructions of Endo-01, created with OpenAI image generation using the original Backstage character as visual reference and approved by the project owner. It is not an extracted original sprite. Character/design © Scott Cawthon; the character artwork is excluded from the code MIT license. The original room textures and audio retain their notices above.
+`Textures/CustomNight/phantom-bb.png` is an AI-assisted recreation made with OpenAI image generation, inspired by Phantom Balloon Boy from FNAF 3; it is not an extracted original game sprite. Character/design © Scott Cawthon. Character artwork is excluded from the code MIT license.

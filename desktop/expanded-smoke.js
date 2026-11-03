@@ -45,23 +45,13 @@
   document.getElementById('earnedShop').click();
   check(document.querySelectorAll('.shop-item').length===8,'Shop catalog incomplete');
   check(new Career(localStorage).data.wallet===career.data.wallet,'Wallet did not persist');
-  // Render all Endo states in the isolated test profile, using the shipped texture.
-  check(assets['Textures/CustomNight/endo.png']?.naturalWidth>0,'Endo texture missing');
-  engine=new NightEngine(1);view='playing';engine.monitor=true;engine.cam=9;render(clock);
-  check(engine.inCamera(9).some(e=>e.name==='Endo'),'Night-one Endo missing from Backstage');
-  engine.enemies[4].pos=1;render(clock);
-  for(const [pos,cam] of [[1,3],[2,5],[3,6]]){engine.enemies[4].pos=pos;engine.cam=cam;render(clock);}
-  engine.monitor=false;engine.lights[0]=true;engine.enemies[4].pos=4;render(clock);
-  jumpEnemy='Endo';jumpStart=clock;view='jump';render(clock+.3);
-  check(Number.isFinite(engine.reactionGrace(4)),'Invalid Endo reaction window');
-  view='playing';engine=new NightEngine(1,[5,0,0,0,5],()=>1);engine.elapsed=80;engine.monitor=true;engine.cam=9;engine.enemies[0].pos=2;engine.tick(.1);engine.tick(.25);
-  check(engine.endoClash&&assets['Textures/CustomNight/endo-punch.png']?.naturalWidth>0,'Endo punch animation missing');render(clock);processEvents();
-  for(let i=0;i<5;i++)engine.tick(.25);
-  check(engine.enemies[0].pos===1,'Endo did not push Bonnie back');
-  customMenu();check(document.getElementById('ai4'),'Endo AI control missing');
+  check(assets['Textures/CustomNight/phantom-bb.png']?.naturalWidth>0,'Phantom BB texture missing');
+  customMenu();check(document.getElementById('ai4')&&!document.getElementById('ai5'),'Phantom AI control missing or removed Endo remains');
   const beforeDemo=JSON.stringify(career.data);
-  await showEndoDemo();await new Promise(resolve=>setTimeout(resolve,400));
-  check(view==='demo'&&engine.endoClash,'Endo demo did not show the real encounter');
+  await showPhantomDemo();await new Promise(resolve=>setTimeout(resolve,400));
+  check(view==='demo'&&engine.phantom.active,'Phantom demo did not show the camera encounter');render(clock);
+  engine.tick(.25);for(let i=0;i<10;i++)engine.tick(.25);processEvents();render(clock);
+  check(engine.phantom.scare>0&&engine.state==='playing'&&!engine.fanOn&&engine.fanFault>0,'Nonlethal Phantom scare or fan failure missing');
   check(!document.getElementById('demoExit').hidden,'Demo exit missing');
   check(JSON.stringify(career.data)===beforeDemo,'Demo changed career progress or money');
   document.getElementById('demoExit').click();check(view==='menu','Demo exit did not return to menu');

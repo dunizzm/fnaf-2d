@@ -22,14 +22,20 @@
   document.getElementById('clockSwitch').click();
   check(!document.getElementById('time').textContent.includes(':'),'Clock did not hide minutes');
   document.getElementById('clockSwitch').click();
+  check(document.querySelectorAll('#usage i').length===1,'Fan should be the single initial usage bar');
+  check(Sound.ambientSource,'Fan office loop is not running');
   const startTemp=engine.temperature;
   document.getElementById('fanTarget').click();
   check(!engine.fanOn,'Clicking fan did not turn it off');
+  check(Sound.ambientSource===null,'Original fan loop is still playing after switch-off');
+  check(document.querySelectorAll('#usage i').length===0,'Fan-off should leave no device usage bars');
   for(let i=0;i<480;i++)engine.tick(.25);
   processEvents();updateHUD();
   check(engine.temperature>40&&engine.disorientation>0,'Overheating did not cause disorientation');
   check(Number(document.documentElement.style.getPropertyValue('--heat'))>0,'Heat effect missing');
   document.getElementById('fanSwitch').click();check(engine.fanOn,'Fan could not restart');
+  check(Sound.ambientSource,'Fan sound did not restart');
+  check(document.querySelectorAll('#usage i').length===1,'Fan restart should restore one bar');
   engine.power=70;updateHUD();document.getElementById('reserveButton').click();
   check(engine.reserveUsed&&career.data.reserve===0&&engine.power>=89,'Reserve charge failed');
   engine.elapsed=539.9;engine.tick(.2);processEvents();updateHUD();
@@ -53,6 +59,11 @@
   for(let i=0;i<5;i++)engine.tick(.25);
   check(engine.enemies[0].pos===1,'Endo did not push Bonnie back');
   customMenu();check(document.getElementById('ai4'),'Endo AI control missing');
-  goMenu();
+  const beforeDemo=JSON.stringify(career.data);
+  await showEndoDemo();await new Promise(resolve=>setTimeout(resolve,400));
+  check(view==='demo'&&engine.endoClash,'Endo demo did not show the real encounter');
+  check(!document.getElementById('demoExit').hidden,'Demo exit missing');
+  check(JSON.stringify(career.data)===beforeDemo,'Demo changed career progress or money');
+  document.getElementById('demoExit').click();check(view==='menu','Demo exit did not return to menu');
   return{shopItems:8,roundSeconds:540,clockMinutes:true,fanHeat:true,perks:true,payment:true,persistence:true};
 })()
